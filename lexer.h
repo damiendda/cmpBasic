@@ -6,12 +6,17 @@ enum TokenType
     Type, // INTEGER or STRING or LONG or SINGLE or DOUBLE
     Keyword,
     Function,
+    Comment,
     String,
     Identifier,
     Number,
+    ArithmeticOperator,
+    RelationnalOperator,
     Equals,
+    Colon,
     Semicolon,
     Comma,
+    Newline,
     OpenParenthese,
     CloseParenthese,
     Undefined,
@@ -42,6 +47,9 @@ std::string tokenTypeToString(TokenType tokenType)
         case Function:
             res = "FUNCTION";
             break;
+        case Comment:
+            res = "COMMENT";
+            break;
         case String:
             res = "STRING";
             break;
@@ -51,8 +59,17 @@ std::string tokenTypeToString(TokenType tokenType)
         case Number:
             res = "NUMBER";
             break;
+        case ArithmeticOperator:
+            res = "ARITHMETIC_OPERATOR";
+            break;
+        case RelationnalOperator:
+            res = "RELATIONNAL_OPERATOR";
+            break;
         case Equals:
             res = "EQUALS";
+            break;
+        case Colon:
+            res = "COLON";
             break;
         case Semicolon:
             res = "SEMICOLON";
@@ -65,6 +82,9 @@ std::string tokenTypeToString(TokenType tokenType)
             break;
         case CloseParenthese:
             res = "CLOSE_PARENTHESE";
+            break;
+        case Newline:
+            res = "NEW_LINE";
             break;
         case Undefined:
         default:
