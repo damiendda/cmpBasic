@@ -1,8 +1,74 @@
 #include <iostream>
 #include <vector>
-#include <fstream>
-#include <sstream>
+
 #include "lexer.h"
+
+std::string tokenTypeToString(TokenType tokenType)
+{
+    std::string res = "";
+
+    switch(tokenType)
+    {
+        case DefineVar:
+            res = "DEFINE_VAR";
+            break;
+        case Type:
+            res = "TYPE";
+            break;
+        case Keyword:
+            res = "KEYWORD";
+            break;
+        case Function:
+            res = "FUNCTION";
+            break;
+        case Comment:
+            res = "COMMENT";
+            break;
+        case String:
+            res = "STRING";
+            break;
+        case Identifier:
+            res = "IDENTIFIER";
+            break;
+        case Number:
+            res = "NUMBER";
+            break;
+        case ArithmeticOperator:
+            res = "ARITHMETIC_OPERATOR";
+            break;
+        case RelationnalOperator:
+            res = "RELATIONNAL_OPERATOR";
+            break;
+        case Equals:
+            res = "EQUALS";
+            break;
+        case Colon:
+            res = "COLON";
+            break;
+        case Semicolon:
+            res = "SEMICOLON";
+            break;
+        case Comma:
+            res = "COMMA";
+            break;
+        case OpenParenthese:
+            res = "OPEN_PARANTHESE";
+            break;
+        case CloseParenthese:
+            res = "CLOSE_PARENTHESE";
+            break;
+        case Newline:
+            res = "NEW_LINE";
+            break;
+        case Undefined:
+        default:
+            res = "Undefined !!";
+            break;
+
+    }
+    return res;
+}
+
 
 bool isDefineVar(const std::string &word)
 {
@@ -26,7 +92,8 @@ bool isType(const std::string &word)
 
 bool isFunction(const std::string &word)
 {
-    std::vector<std::string> functions = {"PRINT", "GOTO", "END", "RND"};
+    std::vector<std::string> functions = {"PRINT", "GOTO", "END",
+        "RND", "INPUT"};
 
     for (const std::string &function: functions) {
         if (function.compare(word) == 0) {
@@ -204,6 +271,7 @@ std::vector<Token> tokenize(std::string &sourceCode)
         words.push_back(word);
     }
 
+    // Move this part in the previous loop to optimize
     for (std::string &w : words)
     {
         Token token;
@@ -247,50 +315,3 @@ std::vector<Token> tokenize(std::string &sourceCode)
     return tokens;
 }
 
-int main (int argc, char* argv[])
-{
-    std::string str = "";
-    if (argc == 2)
-    {
-        std::ifstream file; 
-
-        file.open(argv[1]);
-        if (file.fail())
-        {
-            std::cout << "File failed to open." << std::endl;
-            return 1;
-        }
-
-        std::stringstream buffer;
-
-        buffer << file.rdbuf();
-        str = buffer.str();
-        file.close();
-    }
-    else
-    {
-        str = "DIM N AS INTEGER\n"
-            "N = 9\n"
-            "PRINT \"Hello pour la\" ; N ; \" fois\"\n";
-    }
-
-    std::vector<Token> tokens;
-
-    std::cout << "Input : " << std::endl << str << std::endl;
-
-    tokens = tokenize(str);
-
-    for (Token token : tokens)
-    {
-        if (token.type == Newline)
-        {
-            std::cout << "NEW_LINE" << std::endl;
-        }
-        else
-        {   
-            std::cout << tokenTypeToString(token.type) << " : " << token.value << std::endl;
-        }
-    }
-
-    return 0;
-}

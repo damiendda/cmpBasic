@@ -1,3 +1,6 @@
+#ifndef LEXER_H
+#define LEXER_H
+
 #include <string>
 
 enum TokenType
@@ -29,68 +32,7 @@ struct Token
 
 };
 
-std::string tokenTypeToString(TokenType tokenType)
-{
-    std::string res = "";
+std::string tokenTypeToString(TokenType tokenType);
+std::vector<Token> tokenize(std::string &sourceCode);
 
-    switch(tokenType)
-    {
-        case DefineVar:
-            res = "DEFINE_VAR";
-            break;
-        case Type:
-            res = "TYPE";
-            break;
-        case Keyword:
-            res = "KEYWORD";
-            break;
-        case Function:
-            res = "FUNCTION";
-            break;
-        case Comment:
-            res = "COMMENT";
-            break;
-        case String:
-            res = "STRING";
-            break;
-        case Identifier:
-            res = "IDENTIFIER";
-            break;
-        case Number:
-            res = "NUMBER";
-            break;
-        case ArithmeticOperator:
-            res = "ARITHMETIC_OPERATOR";
-            break;
-        case RelationnalOperator:
-            res = "RELATIONNAL_OPERATOR";
-            break;
-        case Equals:
-            res = "EQUALS";
-            break;
-        case Colon:
-            res = "COLON";
-            break;
-        case Semicolon:
-            res = "SEMICOLON";
-            break;
-        case Comma:
-            res = "COMMA";
-            break;
-        case OpenParenthese:
-            res = "OPEN_PARANTHESE";
-            break;
-        case CloseParenthese:
-            res = "CLOSE_PARENTHESE";
-            break;
-        case Newline:
-            res = "NEW_LINE";
-            break;
-        case Undefined:
-        default:
-            res = "Undefined !!";
-            break;
-
-    }
-    return res;
-}
+#endif
