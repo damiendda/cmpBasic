@@ -4,6 +4,8 @@
 #include <vector>
 
 #include "lexer.h"
+#include "parser.h"
+
 
 int main (int argc, char* argv[])
 {
@@ -38,7 +40,7 @@ int main (int argc, char* argv[])
 
     tokens = tokenize(str);
 
-    for (Token token : tokens)
+    /*for (Token token : tokens)
     {
         if (token.type == Newline)
         {
@@ -48,7 +50,10 @@ int main (int argc, char* argv[])
         {   
             std::cout << tokenTypeToString(token.type) << " : " << token.value << std::endl;
         }
-    }
+    }*/
+
+    std::cout << "\n! ::::: PARSING ::::: !\n______________________" << std::endl;
+    parse(tokens);
 
     return 0;
 }
